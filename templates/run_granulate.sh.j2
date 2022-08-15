@@ -1,0 +1,4 @@
+#!/bin/bash
+cd {{granulate_install_dir}}
+sudo TMPDIR=/proc/self/cwd sh -c "setsid ./{{granulate_binary_name}} -cu --token='{{granulate_api_key}}' --service-name='{{granulate_svc_name}}' > {{granulate_log_file}} 2>&1 &"
+exit 0
