@@ -1,33 +1,33 @@
 ---
-- name: 'create install dir'
+- name: "Create install dir"
   ansible.builtin.file:
     group: root
-    mode: '0755'
-    name: '{{granulate_install_dir}}'
+    mode: "0755"
+    name: "{{ granulate_install_dir }}"
     owner: root
     state: directory
   become: true
-  tags: ['ct-granulate']
+  tags: ["ct-granulate"]
 
-- name: 'download application (IECM)'
+- name: "Download application (IECM)"
   ansible.builtin.get_url:
-    dest: '{{granulate_install_dir}}/{{granulate_binary_name}}'
+    dest: "{{ granulate_install_dir }}/{{ granulate_binary_name }}"
     group: root
-    mode: '0744'
+    mode: "0744"
     owner: root
-    url: '{{granulate_download_url}}/gprofiler_{{ct_arch}}'
-  ignore_errors: '{{ansible_check_mode}}'
+    url: "{{ granulate_download_url }}/gprofiler_{{ ct_arch }}"
+  ignore_errors: "{{ ansible_check_mode }}"
   become: true
-  tags: ['ct-granulate']
+  tags: ["ct-granulate"]
 
-- name: 'render launch script (NL)'
+- name: "Render launch script (NL)"
   ansible.builtin.template:
-    dest: '/usr/local/bin/run_granulate.sh'
+    dest: "/usr/local/bin/run_granulate.sh"
     group: root
-    mode: '0700'
+    mode: "0700"
     owner: root
-    src: 'run_granulate.sh.j2'
+    src: "run_granulate.sh.j2"
   no_log: true
   become: true
-  tags: ['ct-granulate']
+  tags: ["ct-granulate"]
 ...
