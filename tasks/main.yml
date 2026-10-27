@@ -15,7 +15,7 @@
     group: root
     mode: "0744"
     owner: root
-    url: "{{ granulate_download_url }}/gprofiler_{{ ct_arch }}"
+    url: "{{ granulate_download_url }}/gprofiler_{{ ansible_facts['architecture'] | lower }}"
   ignore_errors: "{{ ansible_check_mode }}"
   become: true
   tags: ["ct-granulate"]
